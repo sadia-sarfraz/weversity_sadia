@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Button, ScrollView } from 'react-native';
 
 export default function App() {
+  const [count, setCount] = useState(0);
   return (
     <View style={styles.container}>
     {/*Heading*/}
+    <ScrollView>
     <Text style={styles.heading}>Register</Text>
 
     <View style={styles.nameRow}>
@@ -32,30 +35,14 @@ export default function App() {
       <View style={styles.fullInputContainer}>
         <Text>Password</Text>
         <TextInput style={styles.input} placeholder="Enter password" secureTextEntry />
-        {/*<TouchableOpacity>
-          <Image
-          source= {require('./assets/hide-icon.png')}
-          height={10}
-          width={10}
-          style={{
-                height:25,
-                width:25,
-          }}
-          />
-        </TouchableOpacity>*/}
+        
       </View>
 
       {/* Confirm Password */}
       <View style={styles.fullInputContainer}>
         <Text>Confirm Password</Text>
         <TextInput style={styles.input} placeholder="Confirm password" secureTextEntry />
-        {/*<TouchableOpacity>
-          <Image
-          source= {require('./assets/hide-icon.png')}
-          height={10}
-          width={10}
-          />
-        </TouchableOpacity>*/}
+
       </View>
 
       {/* Register Button */}
@@ -63,6 +50,23 @@ export default function App() {
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
+      {/*Here Counter */}
+      <View style={styles.counterBox}>
+        <Text style={styles.counterText}>Counter: {count}</Text>
+        <View style={styles.buttonRow}>
+          <Button title="+" onPress={() => setCount(count + 1)}/>
+            <Button 
+            title="-"
+            onPress={() => {
+              if (count > 0) setCount (count - 1);
+
+              
+            }}
+            />
+        </View>
+      </View>
+
+      </ScrollView>
     </View>
   );
 }
@@ -109,10 +113,10 @@ input: {
   marginTop: 5,
 },
 button: {
-  backgroundColor:'rgb(216, 13, 81)',
+  backgroundColor:'rgb(162, 28, 48)',
   paddingVertical: 10,
   borderRadius: 25,
-  marginTop: 100,
+  marginTop: 50,
   alignItems: 'center',
 },
 buttonText: {
@@ -120,4 +124,18 @@ buttonText: {
   fontWeight: 'bold',
   fontSize: 16,
 },
-  });
+counterBox: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  counterText: {
+    fontSize: 24,
+    marginBottom: 10,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginBottom: 5,
+  },
+
+ });
